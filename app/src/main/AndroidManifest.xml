@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetFinalAndroid">
         <activity
-            android:name=".ui.PublicationsActivity"
+            android:name=".ui.AppActivity"
             android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"

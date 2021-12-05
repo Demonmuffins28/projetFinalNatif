@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_profileFragment_to_editFragment"
             app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
     </fragment>
     <fragment
         android:id="@+id/explorerFragment"
@@ -32,4 +35,8 @@
         android:id="@+id/editFragment"
         android:name="ca.qc.cgodin.projetfinalandroid.ui.fragments.EditFragment"
         android:label="EditFragment" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="ca.qc.cgodin.projetfinalandroid.ui.LoginActivity"
+        android:label="LoginActivity" />
 </navigation>

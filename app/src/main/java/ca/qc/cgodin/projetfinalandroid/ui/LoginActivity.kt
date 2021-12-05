@@ -6,18 +6,16 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
-import ca.qc.cgodin.projetfinalandroid.ApiClient
-import ca.qc.cgodin.projetfinalandroid.LoginResponse
-import ca.qc.cgodin.projetfinalandroid.SessionManager
+import ca.qc.cgodin.projetfinalandroid.api.ApiClient
+import ca.qc.cgodin.projetfinalandroid.models.LoginResponse
 import ca.qc.cgodin.projetfinalandroid.databinding.ActivityLoginBinding
+import ca.qc.cgodin.projetfinalandroid.util.SharedPref
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-
-    private lateinit var sessionManager: SessionManager
     private lateinit var apiClient: ApiClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +25,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
 
         apiClient = ApiClient()
-        sessionManager = SessionManager(this)
+
+        SharedPref.clearStoredData(this)
+        SharedPref.read(SharedPref.USER_TOKEN, null)?.let { Log.i("Token", it) }
 
         binding.btnConnexion.setOnClickListener {
             val utilisateur = binding.txtUtil.text.toString().trim()
@@ -60,10 +60,10 @@ class LoginActivity : AppCompatActivity() {
                         val loginResponse = response.body()
 
                         if (loginResponse != null) {
-                            loginResponse.jeton?.let { it1 -> sessionManager.saveAuthToken(it1) }
-                            loginResponse.idUtil?.let { it1 -> sessionManager.saveUserId(it1) }
-                            Log.i("Jeton", loginResponse.jeton.toString())
-                            Log.i("UtilID", loginResponse.idUtil.toString())
+                            SharedPref.write(SharedPref.USER_TOKEN, loginResponse.jeton)
+                            SharedPref.write(SharedPref.USER_ID, loginResponse.idUtil)
+//                            Log.i("Jeton", loginResponse.jeton.toString())
+//                            Log.i("UtilID", loginResponse.idUtil.toString())
 
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -77,5 +77,14 @@ class LoginActivity : AppCompatActivity() {
                     }
                 })
         }
+    }
+
+    override fun onBackPressed() {
+        if (!SharedPref.read(SharedPref.USER_TOKEN, null).isNullOrEmpty())
+            super.onBackPressed()
+        else {
+            Toast.makeText(this, "Connectez-vous!", Toast.LENGTH_LONG).show()
+        }
+
     }
 }

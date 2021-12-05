@@ -1,4 +1,4 @@
-package ca.qc.cgodin.projetfinalandroid
+package ca.qc.cgodin.projetfinalandroid.models
 
 
 import com.google.gson.annotations.SerializedName
