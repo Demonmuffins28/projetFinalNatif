@@ -10,10 +10,6 @@ class UtilisateursViewModelProviderFactory(
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if(modelClass.isAssignableFrom(UtilisateursViewModel::class.java)) {
-            UtilisateursViewModel(utilisateursRepository) as T
-        } else {
-            throw IllegalArgumentException("Unknown ViewModel Class")
-        }
+        return UtilisateursViewModel(utilisateursRepository) as T
     }
 }

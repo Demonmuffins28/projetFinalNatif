@@ -16,7 +16,7 @@ class UtilisateursViewModel(
     private val utilisateursRepository: UtilisateursRepository
 ) : ViewModel() {
 
-    val utilisateurs: MutableLiveData<UtilisateursResponse> = MutableLiveData()
+    val utilisateurs: MutableLiveData<Resource<UtilisateursResponse>> = MutableLiveData()
 
     init {
         var token = SharedPref.read(SharedPref.USER_TOKEN, null)
@@ -26,15 +26,11 @@ class UtilisateursViewModel(
     }
 
     fun getUtilisateurs(token: String) = viewModelScope.launch {
-        try {
-            val response = utilisateursRepository.getAllUtilisateurs(token)
-            utilisateurs.postValue(response.body())
-        } catch (e:Exception){}
-//        // Loading state
-//        utilisateurs.postValue(Resource.Loading())
-//        val response = utilisateursRepository.getAllUtilisateurs(token)
-//        // Error / success state
-//        utilisateurs.postValue(handleUtilisateursResponse(response))
+        // Loading state
+        utilisateurs.postValue(Resource.Loading())
+        val response = utilisateursRepository.getAllUtilisateurs(token)
+        // Error / success state
+        utilisateurs.postValue(handleUtilisateursResponse(response))
     }
 
     private fun handleUtilisateursResponse(response: Response<UtilisateursResponse>) : Resource<UtilisateursResponse>? {

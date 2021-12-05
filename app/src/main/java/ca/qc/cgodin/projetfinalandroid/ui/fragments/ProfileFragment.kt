@@ -43,41 +43,29 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             findNavController().navigate(R.id.action_profileFragment_to_loginActivity)
         }
 
-        val utilisateursRepository = UtilisateursRepository()
-        val viewModelProviderFactory = UtilisateursViewModelProviderFactory(utilisateursRepository)
-
-        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(UtilisateursViewModel::class.java)
-
-        appAdapter = AppAdapter()
-        binding.rvProfile.adapter = appAdapter
-
-        viewModel.utilisateurs.observe(
-            viewLifecycleOwner, Observer { response ->
-                appAdapter.setUtilisateurs(response.utilisateurs)
-            }
-        )
-        //setupRecyclerView()
+        viewModel = (activity as AppActivity).viewModel
+        setupRecyclerView()
 
         // subscribe to see every change
-//        viewModel.utilisateurs.observe(viewLifecycleOwner, Observer { response ->
-//            when(response) {
-//                is Resource.Success -> {
-//                    hideProgressBar()
-//                    response.data?.let { appResponse ->
-//                        appAdapter.differ.submitList(appResponse.utilisateurs)
-//                    }
-//                }
-//                is Resource.Error -> {
-//                    hideProgressBar()
-//                    response.message?.let { message ->
-//                        Log.e(TAG, "Une erreur est survenue: $message")
-//                    }
-//                }
-//                is Resource.Loading -> {
-//                    showProgressBar()
-//                }
-//            }
-//        })
+        viewModel.utilisateurs.observe(viewLifecycleOwner, Observer { response ->
+            when(response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let { appResponse ->
+                        appAdapter.differ.submitList(appResponse.utilisateurs)
+                    }
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let { message ->
+                        Log.e(TAG, "Une erreur est survenue: $message")
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {

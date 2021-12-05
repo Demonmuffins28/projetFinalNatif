@@ -5,7 +5,7 @@ import ca.qc.cgodin.projetfinalandroid.db.AppDatabase
 
 // Call request to api
 class UtilisateursRepository(
-    //val db: AppDatabase
+    val db: AppDatabase
 ) {
     suspend fun getAllUtilisateurs(token: String) =
         // Remove token from request

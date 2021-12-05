@@ -21,7 +21,7 @@ class AppActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val utilRepository = UtilisateursRepository(/*AppDatabase(this)*/)
+        val utilRepository = UtilisateursRepository(AppDatabase(this))
         val viewModelProviderFactory = UtilisateursViewModelProviderFactory(utilRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(UtilisateursViewModel::class.java)
 
