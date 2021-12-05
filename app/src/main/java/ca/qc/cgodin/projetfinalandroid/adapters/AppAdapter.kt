@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import ca.qc.cgodin.projetfinalandroid.databinding.ItemUtilPreviewBinding
 import ca.qc.cgodin.projetfinalandroid.models.utilisateur.Utilisateur
 import android.util.Base64
 import android.view.View

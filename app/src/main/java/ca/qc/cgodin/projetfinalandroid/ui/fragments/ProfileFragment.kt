@@ -2,7 +2,9 @@ package ca.qc.cgodin.projetfinalandroid.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,18 +20,25 @@ import ca.qc.cgodin.projetfinalandroid.ui.UtilisateursViewModelProviderFactory
 import ca.qc.cgodin.projetfinalandroid.util.Resource
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
-    private lateinit var binding: FragmentProfileBinding
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
 
     lateinit var viewModel: UtilisateursViewModel
     lateinit var appAdapter: AppAdapter
 
     val TAG = "ProfileFragment"
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentProfileBinding.inflate(layoutInflater)
-        val view = binding.root
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.btnDisconnect.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_loginActivity)
         }
@@ -69,6 +78,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 //                }
 //            }
 //        })
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     private fun hideProgressBar() {
