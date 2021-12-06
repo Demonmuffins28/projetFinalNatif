@@ -6,14 +6,14 @@ import ca.qc.cgodin.projetfinalandroid.models.publications.Publication
 import ca.qc.cgodin.projetfinalandroid.models.utilisateur.Utilisateur
 
 @Database(
-    entities = [Utilisateur::class],
+    entities = [Utilisateur::class, Publication::class],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getUtilisateurDao(): UtilisateurDao
-    //abstract fun getPublicationDao(): PublicationDao
+    abstract fun getPublicationDao(): PublicationDao
 
     companion object {
         @Volatile

@@ -4,6 +4,7 @@ import ca.qc.cgodin.projetfinalandroid.models.LoginResponse
 import ca.qc.cgodin.projetfinalandroid.models.publications.PublicationsResponse
 import ca.qc.cgodin.projetfinalandroid.models.utilisateur.UtilisateursResponse
 import ca.qc.cgodin.projetfinalandroid.util.Constants
+import ca.qc.cgodin.projetfinalandroid.util.SharedPref
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -18,24 +19,20 @@ interface Api {
     ): Call<LoginResponse>
 
     @GET(Constants.USER_URL)
-    suspend fun getAllUsers(
-        @Header("Authorization") authorization: String
-    ) : Response<UtilisateursResponse>
+    suspend fun getAllUsers() : Response<UtilisateursResponse>
 
     @GET(Constants.USER_URL)
     suspend fun getUser(
-        @Query("userId") userId : Int,
-        @Header("Authorization") authorization: String
+        @Query("userId") userId : Int
     ) : Response<UtilisateursResponse>
 
     @GET(Constants.POSTS_URL)
     suspend fun getAllPost(
-        @Query("token") token : String
+        @Header("Authorization") token : String
     ) : Response<PublicationsResponse>
 
     @GET(Constants.POSTS_URL)
     suspend fun getPost(
-        @Query("token") token : String,
         @Query("postId") postId : Int
     ) : Response<PublicationsResponse>
 }

@@ -12,7 +12,7 @@ import android.widget.TextView
 import ca.qc.cgodin.projetfinalandroid.R
 import com.bumptech.glide.Glide
 
-class AppAdapter: RecyclerView.Adapter<AppAdapter.UtilisateurViewHolder>() {
+class UtilisateurAdapter: RecyclerView.Adapter<UtilisateurAdapter.UtilisateurViewHolder>() {
 
     inner class UtilisateurViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     }

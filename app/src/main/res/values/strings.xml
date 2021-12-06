@@ -14,4 +14,6 @@
     <string name="txtConnexion">CONNEXION</string>
     <string name="tbUtilHint">Nom Utilisateur</string>
     <string name="tbPasswordHint">Mot de Passe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -7,11 +7,11 @@ import ca.qc.cgodin.projetfinalandroid.models.publications.Publication
 @Dao
 interface PublicationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(publication: Publication): Int
+    fun upsert(publication: Publication): Long
 
     @Query("SELECT * FROM publications")
     fun getAllPublications(): LiveData<List<Publication>>
 
     @Delete
-    suspend fun deletePublication(publication: Publication)
+    fun deletePublication(publication: Publication)
 }

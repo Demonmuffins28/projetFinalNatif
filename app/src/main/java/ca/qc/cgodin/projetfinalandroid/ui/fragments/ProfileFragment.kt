@@ -7,24 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.qc.cgodin.projetfinalandroid.R
-import ca.qc.cgodin.projetfinalandroid.adapters.AppAdapter
+import ca.qc.cgodin.projetfinalandroid.adapters.UtilisateurAdapter
 import ca.qc.cgodin.projetfinalandroid.databinding.FragmentProfileBinding
-import ca.qc.cgodin.projetfinalandroid.repository.UtilisateursRepository
 import ca.qc.cgodin.projetfinalandroid.ui.AppActivity
-import ca.qc.cgodin.projetfinalandroid.ui.UtilisateursViewModel
-import ca.qc.cgodin.projetfinalandroid.ui.UtilisateursViewModelProviderFactory
+import ca.qc.cgodin.projetfinalandroid.ui.viewModels.AppViewModel
 import ca.qc.cgodin.projetfinalandroid.util.Resource
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var viewModel: UtilisateursViewModel
-    lateinit var appAdapter: AppAdapter
+    lateinit var viewModel: AppViewModel
+    lateinit var utilisateurAdapter: UtilisateurAdapter
 
     val TAG = "ProfileFragment"
 
@@ -47,17 +44,20 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         setupRecyclerView()
 
         // subscribe to see every change
-        viewModel.utilisateurs.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.utilisateurs.observe(viewLifecycleOwner, { response ->
             when(response) {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { appResponse ->
-                        appAdapter.differ.submitList(appResponse.utilisateurs)
+                        utilisateurAdapter.differ.submitList(appResponse.utilisateurs)
                     }
                 }
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
+                        if (message == "UNAUTHORIZED")
+                            // send to login if error of unauthorized
+                            findNavController().navigate(R.id.action_profileFragment_to_loginActivity)
                         Log.e(TAG, "Une erreur est survenue: $message")
                     }
                 }
@@ -75,16 +75,16 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun hideProgressBar() {
         binding.paginationProgressBar.visibility = View.INVISIBLE
-    }
+}
 
     private fun showProgressBar() {
         binding.paginationProgressBar.visibility = View.VISIBLE
     }
 
     private fun setupRecyclerView() {
-        appAdapter = AppAdapter()
+        utilisateurAdapter = UtilisateurAdapter()
         binding.rvProfile.apply {
-            adapter = appAdapter
+            adapter = utilisateurAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }

@@ -5,11 +5,11 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import ca.qc.cgodin.projetfinalandroid.R
 import ca.qc.cgodin.projetfinalandroid.ui.AppActivity
-import ca.qc.cgodin.projetfinalandroid.ui.UtilisateursViewModel
+import ca.qc.cgodin.projetfinalandroid.ui.viewModels.AppViewModel
 
 class EditFragment : Fragment(R.layout.fragment_explorer) {
 
-    lateinit var viewModel: UtilisateursViewModel
+    lateinit var viewModel: AppViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
