@@ -1,14 +1,15 @@
 package ca.qc.cgodin.projetfinalandroid.ui.viewModels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.qc.cgodin.projetfinalandroid.models.publications.PublicationsResponse
 import ca.qc.cgodin.projetfinalandroid.models.utilisateur.Utilisateur
-import ca.qc.cgodin.projetfinalandroid.models.utilisateur.UtilisateursResponse
 import ca.qc.cgodin.projetfinalandroid.repository.AppRepository
 import ca.qc.cgodin.projetfinalandroid.util.Resource
 import ca.qc.cgodin.projetfinalandroid.util.SharedPref
+import com.bumptech.glide.util.Util
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -17,27 +18,19 @@ class AppViewModel(
     private val appRepository: AppRepository
 ) : ViewModel() {
 
-    val utilisateurs: MutableLiveData<Resource<UtilisateursResponse>> = MutableLiveData()
-    val utilisateur: MutableLiveData<Response<Utilisateur>> = MutableLiveData()
+    val utilisateur: MutableLiveData<Resource<Utilisateur>> = MutableLiveData()
 
     val publications: MutableLiveData<Resource<PublicationsResponse>> = MutableLiveData()
     var pages = 1
 
-    init {
-        var token = SharedPref.read(SharedPref.USER_TOKEN, null)
-        var utilId = SharedPref.read(SharedPref.USER_ID, 0)
-        if (token != null) {
-            getUtilisateurs()
-            getPublications("Bearer $token")
-        }
-    }
+    init {}
 
-    fun getUtilisateurs() = viewModelScope.launch {
+    fun getUtilisateur(token: String, utilId: Int) = viewModelScope.launch {
         // Loading state
-        utilisateurs.postValue(Resource.Loading())
-        val response = appRepository.getAllUtilisateurs()
+        utilisateur.postValue(Resource.Loading())
+        val response = appRepository.getUtilisateur(token, utilId)
         // Error / success state
-        utilisateurs.postValue(handleUtilisateursResponse(response))
+        utilisateur.postValue(handleUtilisateurResponse(response))
     }
 
     fun getPublications(token: String) = viewModelScope.launch {
@@ -48,7 +41,19 @@ class AppViewModel(
         publications.postValue(handlePublicationsResponse(response))
     }
 
-    private fun handleUtilisateursResponse(response: Response<UtilisateursResponse>) : Resource<UtilisateursResponse>? {
+    fun setAbonner(token: String, utilId: Int) = viewModelScope.launch {
+        appRepository.setAbonner(token, utilId)
+    }
+
+    fun setDesabonner(token: String, utilId: Int) = viewModelScope.launch {
+        appRepository.setDesabonner(token, utilId)
+    }
+
+    fun addPublication(token: String, body: String) = viewModelScope.launch {
+        appRepository.addPublication(token, body)
+    }
+
+    private fun handleUtilisateurResponse(response: Response<Utilisateur>) : Resource<Utilisateur>? {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)

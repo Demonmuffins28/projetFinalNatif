@@ -10,10 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.qc.cgodin.projetfinalandroid.R
 import ca.qc.cgodin.projetfinalandroid.adapters.PublicationAdapter
+import ca.qc.cgodin.projetfinalandroid.adapters.UtilisateurAdapter
 import ca.qc.cgodin.projetfinalandroid.databinding.FragmentExplorerBinding
 import ca.qc.cgodin.projetfinalandroid.ui.AppActivity
 import ca.qc.cgodin.projetfinalandroid.ui.viewModels.AppViewModel
 import ca.qc.cgodin.projetfinalandroid.util.Resource
+import ca.qc.cgodin.projetfinalandroid.util.SharedPref
 
 class ExplorerFragment : Fragment(R.layout.fragment_explorer) {
     private var _binding: FragmentExplorerBinding? = null
@@ -37,6 +39,9 @@ class ExplorerFragment : Fragment(R.layout.fragment_explorer) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = (activity as AppActivity).viewModel
         setupRecyclerView()
+
+        var token = "Bearer ${SharedPref.read(SharedPref.USER_TOKEN, null)}"
+        viewModel.getPublications(token)
 
         // subscribe to see every change
         viewModel.publications.observe(viewLifecycleOwner, { response ->

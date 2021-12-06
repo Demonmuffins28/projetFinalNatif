@@ -31,6 +31,7 @@
         android:hint="@string/tbPasswordHint"
         android:inputType="none|textVisiblePassword"
         android:minHeight="48dp"
+        android:password="true"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/txtUtil"
         app:layout_constraintTop_toBottomOf="@+id/txtUtil"

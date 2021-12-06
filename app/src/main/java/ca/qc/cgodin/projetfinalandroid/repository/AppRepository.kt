@@ -5,15 +5,20 @@ import ca.qc.cgodin.projetfinalandroid.db.AppDatabase
 
 // Call request to api
 class AppRepository(
-    val db: AppDatabase
+    //val db: AppDatabase
 ) {
-    suspend fun getAllUtilisateurs() =
-        // Remove token from request
-        RetrofitInstance.api.getAllUsers()
-
     suspend fun getAllPublications(token: String) =
         RetrofitInstance.api.getAllPost(token)
 
-    suspend fun getUtilisateur(utilId: Int) =
-        RetrofitInstance.api.getUser(utilId)
+    suspend fun getUtilisateur(token: String, utilId: Int) =
+        RetrofitInstance.api.getUser(token, utilId)
+
+    suspend fun setAbonner(token: String, utilId: Int) =
+        RetrofitInstance.api.abonner(token, utilId)
+
+    suspend fun setDesabonner(token: String, utilId: Int) =
+        RetrofitInstance.api.desabonner(token, utilId)
+
+    suspend fun addPublication(token: String, body: String) =
+        RetrofitInstance.api.addPost(token, body)
 }

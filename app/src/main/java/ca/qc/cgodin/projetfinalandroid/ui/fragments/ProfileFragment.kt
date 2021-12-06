@@ -1,5 +1,6 @@
 package ca.qc.cgodin.projetfinalandroid.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,8 @@ import ca.qc.cgodin.projetfinalandroid.databinding.FragmentProfileBinding
 import ca.qc.cgodin.projetfinalandroid.ui.AppActivity
 import ca.qc.cgodin.projetfinalandroid.ui.viewModels.AppViewModel
 import ca.qc.cgodin.projetfinalandroid.util.Resource
+import ca.qc.cgodin.projetfinalandroid.util.SharedPref
+import com.bumptech.glide.Glide
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var _binding: FragmentProfileBinding? = null
@@ -35,21 +38,30 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         return binding.root
     }
 
+    @SuppressLint("StringFormatInvalid")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.btnDisconnect.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_loginActivity)
         }
 
         viewModel = (activity as AppActivity).viewModel
-        setupRecyclerView()
+
+        var token = "Bearer ${SharedPref.read(SharedPref.USER_TOKEN, null)}"
+        var utilId = SharedPref.read(SharedPref.USER_ID, 0)
+
+        viewModel.getUtilisateur(token, utilId)
 
         // subscribe to see every change
-        viewModel.utilisateurs.observe(viewLifecycleOwner, { response ->
+        viewModel.utilisateur.observe(viewLifecycleOwner, { response ->
             when(response) {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { appResponse ->
-                        utilisateurAdapter.differ.submitList(appResponse.utilisateurs)
+                        binding.tvProfAbout.text = appResponse.aProposDeMoi
+                        binding.tvProflConnexion.text =  getString(R.string.tvDerniereConn, appResponse.dernierAcces)
+                        binding.tvProfilPartisans.text = getString(R.string.tvPartisans, appResponse.partisans?.size)
+                        Glide.with(this).asBitmap().load(appResponse.avatar).into(binding.ivProfilImage)
+                        binding.tvProfilNom.text = appResponse.nom
                     }
                 }
                 is Resource.Error -> {
@@ -79,13 +91,5 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun showProgressBar() {
         binding.paginationProgressBar.visibility = View.VISIBLE
-    }
-
-    private fun setupRecyclerView() {
-        utilisateurAdapter = UtilisateurAdapter()
-        binding.rvProfile.apply {
-            adapter = utilisateurAdapter
-            layoutManager = LinearLayoutManager(activity)
-        }
     }
 }

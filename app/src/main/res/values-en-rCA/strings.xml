@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btnConnexion">Connect</string>
+    <string name="txtUtilisateur">Username</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">Welcome !</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Invalide password</string>
+    <string name="login_failed">Login failed</string>
+    <string name="txtConnexion">CONNECTION</string>
+    <string name="tbUtilHint">Username</string>
+    <string name="tbPasswordHint">Password</string>
+    <string name="tvHomeFragment">Home</string>
+    <string name="tvExplorerFragment">Explore</string>
+    <string name="tvProfilFragment">Profile</string>
+    <string name="tvDerniereConn">Last connection: %1$s</string>
+    <string name="tvPartisans">I\'m following %1$d other users!</string>
+</resources>

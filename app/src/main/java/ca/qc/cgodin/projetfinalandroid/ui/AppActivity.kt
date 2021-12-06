@@ -23,7 +23,7 @@ class AppActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val utilRepository = AppRepository(AppDatabase(this))
+        val utilRepository = AppRepository(/*AppDatabase(this)*/)
         val viewModelProviderFactory = AppViewModelProviderFactory(utilRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(AppViewModel::class.java)
 

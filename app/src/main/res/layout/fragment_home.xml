@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/material_on_primary_emphasis_medium"
     tools:context=".ui.fragments.ProfileFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         android:clipToPadding="false"
         android:paddingBottom="50dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -17,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/ivHomeUtil" />
 
     <ProgressBar
         android:id="@+id/paginationProgressBar"
@@ -30,4 +32,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHomeBonjourUtil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivHomeUtil"
+        android:layout_width="150dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/tvHomeBonjourUtil"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeBonjourUtil"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvHomeAjout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/diteChose"
+        app:layout_constraintStart_toEndOf="@+id/ivHomeUtil"
+        app:layout_constraintTop_toTopOf="@+id/ivHomeUtil" />
+
+    <EditText
+        android:id="@+id/tvPublication"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="@+id/ivHomeUtil"
+        app:layout_constraintStart_toStartOf="@+id/tvHomeAjout"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeAjout" />
+
+    <Button
+        android:id="@+id/btnPublier"
+        android:layout_width="96dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="7dp"
+        android:text="@string/btnPublier"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tvPublication"
+        app:layout_constraintTop_toBottomOf="@+id/tvPublication" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

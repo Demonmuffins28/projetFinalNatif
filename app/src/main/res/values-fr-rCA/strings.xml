@@ -1,16 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">projetFinalAndroid</string>
     <string name="btnConnexion">Connexion</string>
     <string name="txtUtilisateur">Utilisateur</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
+    <string name="prompt_email">Utilisateur</string>
+    <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="welcome">Welcome !</string>
+    <string name="invalid_username">Utilisateur invalide</string>
+    <string name="invalid_password">Mot de passe invalide</string>
+    <string name="login_failed">Erreur de connexion</string>
     <string name="txtConnexion">CONNEXION</string>
     <string name="tbUtilHint">Nom Utilisateur</string>
     <string name="tbPasswordHint">Mot de Passe</string>
@@ -19,6 +19,4 @@
     <string name="tvProfilFragment">Profil</string>
     <string name="tvDerniereConn">Dernière connexion: %1$s</string>
     <string name="tvPartisans">Je suis %1$d autre(s) utilisateur(s)!</string>
-    <string name="diteChose">Dite quelque chose...</string>
-    <string name="btnPublier">Publier</string>
 </resources>

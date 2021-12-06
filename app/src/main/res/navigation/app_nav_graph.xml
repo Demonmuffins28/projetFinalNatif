@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav_graph"
     app:startDestination="@id/homeFragment">
 
@@ -8,9 +9,6 @@
         android:id="@+id/homeFragment"
         android:name="ca.qc.cgodin.projetfinalandroid.ui.fragments.HomeFragment"
         android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_homeFragment_to_loginActivity"
             app:destination="@id/loginActivity" />
@@ -20,9 +18,6 @@
         android:name="ca.qc.cgodin.projetfinalandroid.ui.fragments.ProfileFragment"
         android:label="ProfileFragment" >
         <action
-            android:id="@+id/action_profileFragment_to_editFragment"
-            app:destination="@id/editFragment" />
-        <action
             android:id="@+id/action_profileFragment_to_loginActivity"
             app:destination="@id/loginActivity" />
     </fragment>
@@ -31,16 +26,9 @@
         android:name="ca.qc.cgodin.projetfinalandroid.ui.fragments.ExplorerFragment"
         android:label="ExplorerFragment" >
         <action
-            android:id="@+id/action_explorerFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
             android:id="@+id/action_explorerFragment_to_loginActivity"
             app:destination="@id/loginActivity" />
     </fragment>
-    <fragment
-        android:id="@+id/editFragment"
-        android:name="ca.qc.cgodin.projetfinalandroid.ui.fragments.EditFragment"
-        android:label="EditFragment" />
     <activity
         android:id="@+id/loginActivity"
         android:name="ca.qc.cgodin.projetfinalandroid.ui.LoginActivity"

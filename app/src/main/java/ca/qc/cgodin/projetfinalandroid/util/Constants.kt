@@ -6,4 +6,5 @@ object Constants {
     const val LOGIN_URL = "connexion"
     const val POSTS_URL = "publications"
     const val USER_URL = "utilisateurs"
+    const val FOLLOW_URL = "abonner"
 }

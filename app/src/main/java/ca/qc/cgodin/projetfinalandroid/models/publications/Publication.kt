@@ -15,5 +15,9 @@ data class Publication(
     @PrimaryKey
     val id: Int?,
     @SerializedName("utilisateur_id")
-    val utilisateurId: Int?
-) : Serializable
+    val utilisateurId: Int,
+    @SerializedName("nom")
+    val nom: String?,
+    @SerializedName("avatar")
+    val avatar: String?
+): Serializable
