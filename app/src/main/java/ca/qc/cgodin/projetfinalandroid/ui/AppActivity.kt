@@ -24,7 +24,7 @@ class AppActivity : AppCompatActivity() {
         setContentView(view)
 
         val utilRepository = AppRepository(/*AppDatabase(this)*/)
-        val viewModelProviderFactory = AppViewModelProviderFactory(utilRepository)
+        val viewModelProviderFactory = AppViewModelProviderFactory(application ,utilRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(AppViewModel::class.java)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.appNavHostFragment) as NavHostFragment

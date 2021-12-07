@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class PublicationsResponse(
     @SerializedName("items")
-    val publications: List<Publication>?,
+    val publications: MutableList<Publication>,
     @SerializedName("_links")
     val links: Links?,
     @SerializedName("_meta")

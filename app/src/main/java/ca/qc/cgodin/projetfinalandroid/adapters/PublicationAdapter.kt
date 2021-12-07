@@ -25,8 +25,7 @@ class PublicationAdapter: RecyclerView.Adapter<PublicationAdapter.PublicationsVi
 
     private var abonne: MutableList<Int>? = mutableListOf()
 
-    inner class PublicationsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-    }
+    inner class PublicationsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     private val differCallback = object : DiffUtil.ItemCallback<Publication>() {
         override fun areItemsTheSame(oldItem: Publication, newItem: Publication): Boolean {

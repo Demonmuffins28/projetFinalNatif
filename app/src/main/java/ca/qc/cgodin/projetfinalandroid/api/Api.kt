@@ -27,7 +27,8 @@ interface Api {
 
     @GET(Constants.POSTS_URL)
     suspend fun getAllPost(
-        @Header("Authorization") token : String
+        @Header("Authorization") token : String,
+        @Query("page") page : Int
     ) : Response<PublicationsResponse>
 
     @GET(Constants.POSTS_URL)
@@ -40,7 +41,7 @@ interface Api {
     @POST(Constants.POSTS_URL)
     suspend fun addPost(
         @Header("Authorization") token : String,
-        @Field("body") body : String
+        @Field("corps") body : String
     )
 
     @POST(Constants.FOLLOW_URL + "/{id}")

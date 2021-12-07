@@ -7,8 +7,8 @@ import ca.qc.cgodin.projetfinalandroid.db.AppDatabase
 class AppRepository(
     //val db: AppDatabase
 ) {
-    suspend fun getAllPublications(token: String) =
-        RetrofitInstance.api.getAllPost(token)
+    suspend fun getAllPublications(token: String, page: Int) =
+        RetrofitInstance.api.getAllPost(token, page)
 
     suspend fun getUtilisateur(token: String, utilId: Int) =
         RetrofitInstance.api.getUser(token, utilId)

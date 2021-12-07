@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -71,6 +72,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             // send to login if error of unauthorized
                             findNavController().navigate(R.id.action_profileFragment_to_loginActivity)
                         Log.e(TAG, "Une erreur est survenue: $message")
+                        Toast.makeText(activity, "Une erreur est survenue: $message", Toast.LENGTH_LONG).show()
                     }
                 }
                 is Resource.Loading -> {
