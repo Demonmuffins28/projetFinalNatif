@@ -93,7 +93,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         // subscribe to see every change
         viewModel.utilisateur.observe(viewLifecycleOwner, { response ->
             when(response) {
-                is Resource.Success -> {
+                is Resource.Success -> {12345
                     hideProgressBar()
                     response.data?.let { appResponse ->
                         publicationAdapter.setAbonner(appResponse.partisans)
@@ -110,7 +110,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
-                        if (message == "UNAUTHORIZED")
+                        if (message == "UNAUTHORIZED" || message == "Network Failure")
                         // send to login if error of unauthorized
                             findNavController().navigate(R.id.action_homeFragment_to_loginActivity)
                         Log.e(TAG, "Une erreur est survenue: $message")
