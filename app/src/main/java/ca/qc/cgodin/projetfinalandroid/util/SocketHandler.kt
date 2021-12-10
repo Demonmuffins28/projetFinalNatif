@@ -11,7 +11,7 @@ object SocketHandler {
     @Synchronized
     fun setSocket() {
         try {
-            mSocket = IO.socket(Constants.BASE_URL)
+            mSocket = IO.socket(Constants.BASE_URL + "/chat")
         } catch (e: URISyntaxException) {}
     }
 

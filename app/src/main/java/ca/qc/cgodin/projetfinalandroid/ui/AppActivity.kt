@@ -11,6 +11,7 @@ import ca.qc.cgodin.projetfinalandroid.db.AppDatabase
 import ca.qc.cgodin.projetfinalandroid.repository.AppRepository
 import ca.qc.cgodin.projetfinalandroid.ui.viewModels.AppViewModel
 import ca.qc.cgodin.projetfinalandroid.ui.viewModels.AppViewModelProviderFactory
+import ca.qc.cgodin.projetfinalandroid.util.SocketHandler
 
 class AppActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAppBinding
@@ -23,6 +24,10 @@ class AppActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+//        SocketHandler.setSocket()
+//        val mSocket = SocketHandler.getSocket()
+//        SocketHandler.establishConnection()
+
         val utilRepository = AppRepository(/*AppDatabase(this)*/)
         val viewModelProviderFactory = AppViewModelProviderFactory(application ,utilRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(AppViewModel::class.java)
@@ -30,5 +35,10 @@ class AppActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.appNavHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigationView.setupWithNavController(navController)
+    }
+
+    override fun onDestroy() {
+        SocketHandler.closeConnection()
+        super.onDestroy()
     }
 }

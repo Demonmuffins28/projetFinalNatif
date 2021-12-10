@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
@@ -47,6 +49,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         SocketHandler.setSocket()
         val mSocket = SocketHandler.getSocket()
         SocketHandler.establishConnection()
+
+        binding.fBtnRefresh?.visibility = INVISIBLE
+
+        mSocket.on("actualiser") {args ->
+            if (args[0] != null) {
+                binding.fBtnRefresh?.visibility = VISIBLE
+            } else {
+                binding.fBtnRefresh?.visibility = INVISIBLE
+            }
+        }
+
+        SocketHandler.closeConnection()
 
         viewModel = (activity as AppActivity).viewModel
         setupRecyclerView()
@@ -100,8 +114,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         binding.tvHomeBonjourUtil.text = "Bonjour, ${appResponse.nom}!"
                         Glide.with(this).asBitmap().load(appResponse.avatar).into(binding.ivHomeUtil)
                         binding.btnPublier.setOnClickListener {
-                            if (binding.tvPublication.text.toString() != "")
+                            if (binding.tvPublication.text.toString() != "") {
                                 viewModel.addPublication(token, binding.tvPublication.text.toString())
+                                Toast.makeText(activity, "Publication envoyé.", Toast.LENGTH_LONG).show()
+                                binding.tvPublication.text.clear()
+                            }
                             else
                                 Toast.makeText(activity, "Ajouter quelque chose à publier.", Toast.LENGTH_LONG).show()
                         }
@@ -125,8 +142,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onDestroyView() {
         _binding = null
-        SocketHandler.closeConnection()
+        //SocketHandler.closeConnection()
         super.onDestroyView()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
     }
 
     private fun hideProgressBar() {

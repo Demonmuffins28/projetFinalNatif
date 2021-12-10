@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
+    tools:context=".ui.MainActivity">
+
+    <EditText
+        android:id="@+id/txtUtil"
+        android:layout_width="450dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="-100dp"
+        android:ems="10"
+        android:hint="@string/tbUtilHint"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.484" />
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="450dp"
+        android:layout_height="120dp"
+        android:ems="10"
+        android:hint="@string/tbPasswordHint"
+        android:inputType="none|textVisiblePassword"
+        android:minHeight="48dp"
+        android:password="true"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/txtUtil"
+        app:layout_constraintTop_toBottomOf="@+id/txtUtil"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btnConnexion"
+        android:layout_width="400dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/btnConnexion"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPassword"
+        app:layout_constraintStart_toStartOf="@+id/txtPassword"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="@string/txtConnexion"
+        android:textAlignment="center"
+        android:textColor="@color/teal_200"
+        android:textSize="96sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtUtil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
